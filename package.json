@@ -1,0 +1,28 @@
+{
+  "name": "photos-proxy",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "express": "^4.17.1",
+    "mongoose": "^5.9.20",
+    "morgan": "^1.10.0",
+    "webpack": "^4.43.0",
+    "webpack-cli": "^3.3.12"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "cd description; npm run build; cd ..; cd photos; npm run build; cd ..; cd pledges; npm run build; cd .."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Zukickstarter/photos-proxy.git"
+  },
+  "author": "Shaw Summa",
+  "bugs": {
+    "url": "https://github.com/Zukickstarter/photos-proxy/issues"
+  },
+  "license": "UNLICENSED",
+  "homepage": "https://github.com/Zukickstarter/photos-proxy#readme"
+}

@@ -1,0 +1,9 @@
+[submodule "photos"]
+	path = photos
+	url = https://github.com/Zukickstarter/photos
+[submodule "description"]
+	path = description
+	url = https://github.com/Zukickstarter/description
+[submodule "pledges"]
+	path = pledges
+	url = https://github.com/ZuKickstarter/pledges
