@@ -11,6 +11,16 @@ const port = 6822;
 
 app.use(morgan('tiny'));
 
+const api = function (res, idn) {
+  if (idn === undefined) {
+    idn = 0;
+  }
+  PhotoModel.find({id: idn})
+    .then((data) => {
+      res.send(cleanMany(data));
+    });
+};
+
 app.get('/', function (req, res) {
   res.sendfile('index.html', { root: __dirname + "./../pub/" });
 });
@@ -25,14 +35,6 @@ app.get('/pledges/bundle.js', function (req, res) {
 
 app.get('/description/bundle.js', function (req, res) {
   res.sendfile('bundle.js', { root: __dirname + "./../description/public/" });
-});
-
-app.get('/maisonNeueBook.woff', function (req, res) {
-  res.sendfile('maisonNeueBook.woff', { root: __dirname + "./../description/public/" });
-});
-
-app.get('/maisonNeueBook.woff2', function (req, res) {
-  res.sendfile('maisonNeueBook.woff2', { root: __dirname + "./../description/public/" });
 });
 
 app.get('/api/description', (req, res) => {
@@ -63,13 +65,13 @@ app.get('/api/pledges/:id', (req, res) => {
     });
 });
 
-app.get('/api/photos', function (req, res) {
-  PhotoModel.find(function (err, photos) {
-    if (err) {
-      throw err;
-    }
-    res.send(cleanMany(photos));
-  });
+app.get('/api/photos', function(req, res) {
+  api(res, 0);
 });
+
+app.get('/api/photos/:id', function (req, res) {
+  api(res, req.params.id);
+});
+
 
 app.listen(port, () => console.log(`Description app listening at http://localhost:${port}`));
