@@ -25,6 +25,10 @@ app.get('/', function (req, res) {
   res.sendfile('index.html', { root: __dirname + "./../pub/" });
 });
 
+app.get('/index.html', function (req, res) {
+  res.sendFile('index.html', { root: __dirname + "./../pub/" });
+});
+
 app.get('/photos/bundle.js', function (req, res) {
   res.sendfile('bundle.js', { root: __dirname + "./../photos/pub/" });
 });
