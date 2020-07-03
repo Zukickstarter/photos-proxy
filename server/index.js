@@ -7,7 +7,7 @@ const { cleanMany } = require('../photos/server/clean.js');
 const { getPledgeData } = require('../pledges/server/model.js');
 
 const app = express();
-const port = 6822;
+const port = 80;
 
 app.use(morgan('tiny'));
 
