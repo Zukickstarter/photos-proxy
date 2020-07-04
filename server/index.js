@@ -1,5 +1,4 @@
 const express = require('express');
-const path = require('path');
 const morgan = require('morgan');
 const Desc = require('../description/database/model.js');
 const { PhotoModel } = require('../photos/db/photo.js');
@@ -22,23 +21,35 @@ const api = function (res, idn) {
 };
 
 app.get('/', function (req, res) {
-  res.sendfile('index.html', { root: __dirname + "./../pub/" });
+  res.sendFile('index.html', { root: __dirname + "./../pub/" });
 });
 
 app.get('/index.html', function (req, res) {
   res.sendFile('index.html', { root: __dirname + "./../pub/" });
 });
 
+app.get('/beta.html', function (req, res) {
+  res.sendFile('beta.html', { root: __dirname + "./../pub/" });
+});
+
 app.get('/photos/bundle.js', function (req, res) {
-  res.sendfile('bundle.js', { root: __dirname + "./../photos/pub/" });
+  res.sendFile('bundle.js', { root: __dirname + "./../photos/pub/" });
 });
 
 app.get('/pledges/bundle.js', function (req, res) {
-  res.sendfile('bundle.js', { root: __dirname + "./../pledges/dist/" });
+  res.sendFile('bundle.js', { root: __dirname + "./../pledges/dist/" });
 });
 
 app.get('/description/bundle.js', function (req, res) {
-  res.sendfile('bundle.js', { root: __dirname + "./../description/public/" });
+  res.sendFile('bundle.js', { root: __dirname + "./../description/public/" });
+});
+
+app.get('/bundle.js', function (req, res) {
+  res.sendFile('bundle.js', { root: __dirname + "./../pub/" });
+});
+
+app.get('/pub/:id.bundle.js', function (req, res) {
+  res.sendFile(req.params.id + '.bundle.js', { root: __dirname + "./../pub/" });
 });
 
 app.get('/api/description', (req, res) => {
