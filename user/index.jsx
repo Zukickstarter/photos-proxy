@@ -7,34 +7,39 @@ import Pledges from '../pledges/src/components/App.jsx';
 import NavBar from '../description/client/components/NavBar.jsx';
 
 const Main = class extends React.Component {
-    constructor(props) {
-        super(props);
-    }
+  constructor(props) {
+    super(props);
+    this.state = {
+      data: [null],
+    };
+    fetch('/api/photos/' + id)
+      .then(x => x.json())
+      .then(data => this.setState({
+        data: data,
+      }));
+  }
 
-    render() {
-        return <div>
-            <div id="photos-react">
-                <Photos data={this.props.data} />
-            </div>
-            <div id="navbar-main">
-                <NavBar />
-            </div>
-            <br />
-            <div>
-                <div id="description-main">
-                    <Desc id={this.props.id} />
-                </div>
-                <div id="pledges">
-                    <Pledges id={this.props.id} />
-                </div>
-            </div>
-        </div>;
-    }
+  render() {
+    return <div>
+      <div id="photos-react">
+        <Photos data={this.state.data} />
+      </div>
+      <div id="navbar-main">
+        <NavBar />
+      </div>
+      <br />
+      <div>
+        <div id="description-main">
+          <Desc id={this.props.id} />
+        </div>
+        <div id="pledges">
+          <Pledges id={this.props.id} />
+        </div>
+      </div>
+    </div>;
+  }
 }
 
 let id = new URLSearchParams(window.location.search).get('id') || 1;
-fetch('/api/photos/' + id)
-    .then(x => x.json())
-    .then(function (data) {
-        ReactDOM.render(<Main data={data} id={id} />, document.getElementById('react'));
-    });
+
+ReactDOM.render(<Main id={id} />, document.getElementById('react'));
